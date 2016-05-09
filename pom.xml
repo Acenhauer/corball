@@ -1,8 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
     <version>16.05.11</version>
+    <name>Corball</name>
+    <description>Corball - The Automation Framework</description>
     <url>https://github.com/Acenhauer/corball/</url>
     <licenses>
         <license>
@@ -34,8 +37,8 @@
         <connection>scm:git:git@github.com:Acenhauer/corball.git</connection>
         <url>scm:git:git@github.com:Acenhauer/corball.git</url>
         <developerConnection>scm:git:git@github.com:Acenhauer/corball.git</developerConnection>
-      <tag>corball-core-16.05.09</tag>
-  </scm>
+        <tag>corball-core-16.05.09</tag>
+    </scm>
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
