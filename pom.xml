@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.05-SNAPSHOT</version>
+    <version>16.05.09</version>
     <repositories>
         <repository>
             <id>saucelabs-repository</id>
