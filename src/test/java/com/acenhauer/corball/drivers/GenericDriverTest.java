@@ -1,0 +1,15 @@
+package com.acenhauer.corball.drivers;
+
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
+
+/**
+ * Created by guillem on 15/02/16.
+ */
+public class GenericDriverTest {
+    @Test
+    public void testMethod() {
+        assertTrue(true);
+    }
+}
