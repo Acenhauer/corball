@@ -31,9 +31,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git@bitbucket.org:Acenhauer/moladek.git</connection>
-        <url>scm:git:git@bitbucket.org:Acenhauer/moladek.git</url>
-        <developerConnection>scm:git:git@bitbucket.org:Acenhauer/moladek.git</developerConnection>
+        <connection>scm:git:git@github.com:Acenhauer/corball.git</connection>
+        <url>scm:git:git@github.com:Acenhauer/corball.git</url>
+        <developerConnection>scm:git:git@github.com:Acenhauer/corball.git</developerConnection>
       <tag>corball-core-16.05.09</tag>
   </scm>
     <distributionManagement>
