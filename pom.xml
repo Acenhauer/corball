@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.05.09</version>
+    <version>16.05.09-SNAPSHOT</version>
     <url>https://bitbucket.org/Acenhauer/moladek</url>
     <licenses>
         <license>
