@@ -13,6 +13,8 @@ reports/
 surefire/
 
 ### Java ###
+=======
+>>>>>>> c47d8ed29fac4c1ce8b250c709c8a7cc9c61b1fd
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -22,6 +24,7 @@ surefire/
 *.jar
 *.war
 *.ear
+<<<<<<< HEAD
 *.log
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -163,3 +166,7 @@ src/test/java/com/hotelbeds/tests/BaseHotelBedsFlows.java
 .classpath
 .settings
 
+=======
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
