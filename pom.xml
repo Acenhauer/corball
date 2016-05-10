@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.05.11</version>
+    <version>16.05.10</version>
     <name>Corball</name>
     <description>Corball - The Automation Framework</description>
     <url>https://github.com/Acenhauer/corball/</url>
@@ -23,7 +23,7 @@
         <developer>
             <id>guillemhs</id>
             <name>Guillem Hernandez Sola</name>
-            <email>guillem.hernandez@acenhauer.com</email>
+            <email>guillem@acenhauer.com</email>
             <url>http://www.acenhauer.com</url>
             <organization>Acenhauer</organization>
             <organizationUrl>http://www.acenhauer.com</organizationUrl>
@@ -37,7 +37,6 @@
         <connection>scm:git:git@github.com:Acenhauer/corball.git</connection>
         <url>scm:git:git@github.com:Acenhauer/corball.git</url>
         <developerConnection>scm:git:git@github.com:Acenhauer/corball.git</developerConnection>
-        <tag>corball-core-16.05.09</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
@@ -46,7 +45,7 @@
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
     <build>
@@ -108,7 +107,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.1</version>
+                <version>2.9.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
