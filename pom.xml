@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.05.11</version>
+    <version>16.05.11-SNAPSHOT</version>
     <url>https://github.com/Acenhauer/corball/</url>
     <licenses>
         <license>
