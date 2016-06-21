@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.05.10</version>
+    <version>16.06.21-SNAPSHOT</version>
     <name>Corball</name>
     <description>Corball - The Automation Framework</description>
     <url>https://github.com/Acenhauer/corball/</url>
@@ -34,9 +34,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git@github.com:Acenhauer/corball.git</connection>
-        <url>scm:git:git@github.com:Acenhauer/corball.git</url>
-        <developerConnection>scm:git:git@github.com:Acenhauer/corball.git</developerConnection>
+        <connection>scm:git:git@github.com:Acenhauer/corball-test-automation.git</connection>
+        <url>scm:git:git@github.com:Acenhauer/corball-test-automation.git</url>
+        <developerConnection>scm:git:git@github.com:Acenhauer/corball-test-automation.git</developerConnection>
     </scm>
     <distributionManagement>
         <snapshotRepository>
