@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.06.28-SNAPSHOT</version>
+    <version>16.06.29-SNAPSHOT</version>
     <name>Corball</name>
     <description>Corball - The Automation Framework</description>
     <url>https://github.com/Acenhauer/corball/</url>
@@ -177,6 +177,26 @@
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
             <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.theoryinpractise</groupId>
+            <artifactId>cucumber-testng-factory</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>1.2.4</version>
         </dependency>
     </dependencies>
 </project>
