@@ -3,8 +3,8 @@ package com.acenhauer.corball.hybrid;
 import com.acenhauer.corball.drivers.GenericSauceDriver;
 import com.acenhauer.corball.selenium.BrowserCapabilities;
 import com.acenhauer.corball.selenium.RemoteWebDriverWait;
-import com.acenhauer.corball.utils.PropertiesUtils;
 import com.acenhauer.corball.soap.SOAPClient;
+import com.acenhauer.corball.utils.PropertiesUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -29,33 +29,34 @@ public class BaseHybridDriver extends GenericSauceDriver {
     public static final Integer DEFAULTTIMEOUTSEC = 30000; // enough time to load
     public static final Long DRIVER_SELENIUM_TIMEOUT_MILISECONDS = new Long(20000);
     public static final String browserName =
-        testProperties.getProperty(PropertiesUtils.BROWSER);
+            testProperties.getProperty(PropertiesUtils.BROWSER);
     public static final String form = testProperties.getProperty(PropertiesUtils.FORM);
     public static final String startUrl = testProperties.getProperty(PropertiesUtils.HOST);
+    public static RemoteWebDriverWait wait = null;
 
-
-    @BeforeMethod(alwaysRun = true) public void setUp(Method method) {
+    @BeforeMethod(alwaysRun = true)
+    public void setUp(Method method) {
         globalLogger.set(Logger.getLogger(BaseHybridDriver.class));
         globalBrowserCapabilities.set(new BrowserCapabilities());
         RemoteWebDriver rwd = null;
         try {
             DesiredCapabilities caps = globalBrowserCapabilities.get()
-                .getDesiredCapabilitiesPerBrowser(browserName,
-                    method.getName() + "-" + UUID.randomUUID());
+                    .getDesiredCapabilitiesPerBrowser(browserName,
+                            method.getName() + "-" + UUID.randomUUID());
             rwd = new RemoteWebDriver(new URL(hub), caps);
             sessionId.set(rwd.getSessionId().toString());
             globalLogger.get()
-                .info("Starting " + browserName + " using sessionId " + getSessionId());
+                    .info("Starting " + browserName + " using sessionId " + getSessionId());
         } catch (MalformedURLException e) {
             logger().info(e);
         }
         globalDriver.set(rwd);
         globalDriver.get().manage().timeouts()
-            .pageLoadTimeout(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
+                .pageLoadTimeout(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
         globalDriver.get().manage().timeouts()
-            .setScriptTimeout(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
+                .setScriptTimeout(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
         globalDriver.get().manage().timeouts()
-            .implicitlyWait(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
+                .implicitlyWait(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
         globalDriver.get().manage().deleteAllCookies();
         wait = new RemoteWebDriverWait(globalDriver.get(), DEFAULTTIMEOUTSEC);
         globalDriver.get().manage().window().maximize();
@@ -64,7 +65,8 @@ public class BaseHybridDriver extends GenericSauceDriver {
         globalLogger.get().info("Starting URL: " + globalDriver.get().getCurrentUrl());
     }
 
-    @AfterMethod(alwaysRun = true) protected void teardown(ITestResult tr) {
+    @AfterMethod(alwaysRun = true)
+    protected void teardown(ITestResult tr) {
         globalDriver.get().quit();
         if (tr.isSuccess()) {
             logger().info(getSessionId() + " PASSED! ");
