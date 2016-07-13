@@ -53,7 +53,7 @@ public class MobileApp extends GenericSauceDriver {
         if (device != null && device.equalsIgnoreCase("Android")) {
             useSauceStorage(appAbsolutePath);
             DesiredCapabilities caps = DesiredCapabilities.android();
-            caps.setCapability("appiumVersion", "1.5.0");
+            caps.setCapability("appiumVersion", "1.5.3");
             caps.setCapability("deviceName", "Android Emulator");
             caps.setCapability("deviceType", "phone");
             caps.setCapability("deviceOrientation", "portrait");
@@ -69,7 +69,7 @@ public class MobileApp extends GenericSauceDriver {
             globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } else {
             DesiredCapabilities caps = DesiredCapabilities.iphone();
-            caps.setCapability("appiumVersion", "1.5.0");
+            caps.setCapability("appiumVersion", "1.5.3");
             caps.setCapability("deviceName", "iPhone 6");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("platformVersion", platformVersion);

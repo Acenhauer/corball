@@ -26,7 +26,7 @@ public class MobileBase extends GenericSauceDriver {
         // let's use the os name to differentiate, because we only use default browser in that os
         if (device != null && device.equalsIgnoreCase("Android")) {
             DesiredCapabilities caps = DesiredCapabilities.android();
-            caps.setCapability("appiumVersion", "1.5.0");
+            caps.setCapability("appiumVersion", "1.5.3");
             caps.setCapability("deviceName", "Android Emulator");
             caps.setCapability("deviceType", "phone");
             caps.setCapability("deviceOrientation", "portrait");
@@ -41,7 +41,7 @@ public class MobileBase extends GenericSauceDriver {
             globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } else {
             DesiredCapabilities caps = DesiredCapabilities.iphone();
-            caps.setCapability("appiumVersion", "1.5.0");
+            caps.setCapability("appiumVersion", "1.5.3");
             caps.setCapability("deviceName", "iPhone 6");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("platformVersion", platformVersion);
