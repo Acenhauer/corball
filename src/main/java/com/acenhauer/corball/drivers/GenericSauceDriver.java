@@ -32,7 +32,6 @@ public class GenericSauceDriver
             new InheritableThreadLocal<SOAPClient>();
     public InheritableThreadLocal<BrowserCapabilities> globalBrowserCapabilities =
             new InheritableThreadLocal<BrowserCapabilities>();
-    public static RemoteWebDriverWait wait = null;
 
     protected RemoteWebDriver driver() {
         return globalDriver.get();
