@@ -58,21 +58,10 @@ public class BaseHybridDriver extends GenericSauceDriver {
         globalDriver.get().manage().timeouts()
                 .implicitlyWait(DRIVER_SELENIUM_TIMEOUT_MILISECONDS, TimeUnit.MILLISECONDS);
         globalDriver.get().manage().deleteAllCookies();
-        wait = new RemoteWebDriverWait(globalDriver.get(), DEFAULTTIMEOUTSEC);
         globalDriver.get().manage().window().maximize();
         globalDriver.get().get(host);
         globalXMLDriver.set(new SOAPClient());
         globalLogger.get().info("Starting URL: " + globalDriver.get().getCurrentUrl());
-    }
-
-    @AfterMethod(alwaysRun = true)
-    protected void teardown(ITestResult tr) {
-        globalDriver.get().quit();
-        if (tr.isSuccess()) {
-            logger().info(getSessionId() + " PASSED! ");
-        } else {
-            logger().info(getSessionId() + " FAILED! ");
-        }
-        globalLogger.get().info("Finished execution for testcase " + getSessionId());
+        wait = new RemoteWebDriverWait(rwd, DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
     }
 }

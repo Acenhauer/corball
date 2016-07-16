@@ -26,7 +26,7 @@ public class StartWebDriver {
                                int timeOut, String host) {
         globalLogger.set(Logger.getLogger(BaseWebDriver.class));
         globalBrowserCapabilities.set(new BrowserCapabilities());
-       RemoteWebDriver rwd  = null;
+        RemoteWebDriver rwd = null;
         try {
             DesiredCapabilities caps = globalBrowserCapabilities.get()
                     .getDesiredCapabilitiesPerBrowser(browserName,
@@ -46,9 +46,9 @@ public class StartWebDriver {
         globalDriver.get().manage().timeouts()
                 .implicitlyWait(timeOut, TimeUnit.MILLISECONDS);
         globalDriver.get().manage().deleteAllCookies();
-        wait = new RemoteWebDriverWait(globalDriver.get(), timeOut);
         globalDriver.get().manage().window().maximize();
         globalDriver.get().get(host);
         globalLogger.get().info("Starting URL: " + globalDriver.get().getCurrentUrl());
+        wait = new RemoteWebDriverWait(rwd, timeOut);
     }
 }

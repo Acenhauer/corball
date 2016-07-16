@@ -7,6 +7,7 @@ import com.acenhauer.corball.soap.SOAPClient;
 import com.acenhauer.corball.utils.PropertiesUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 
@@ -68,9 +69,13 @@ public class GenericSauceDriver
     }
 
     @AfterMethod(alwaysRun = true)
-    protected void teardown() {
-        if (globalDriver.get() != null) {
-            globalDriver.get().quit();
+    protected void teardown(ITestResult tr) {
+        globalDriver.get().quit();
+        if (tr.isSuccess()) {
+            logger().info(getSessionId() + " PASSED! ");
+        } else {
+            logger().info(getSessionId() + " FAILED! ");
         }
+        globalLogger.get().info("Finished execution for testcase " + getSessionId());
     }
 }
