@@ -32,7 +32,6 @@ public class BaseHybridDriver extends GenericSauceDriver {
             testProperties.getProperty(PropertiesUtils.BROWSER);
     public static final String form = testProperties.getProperty(PropertiesUtils.FORM);
     public static final String startUrl = testProperties.getProperty(PropertiesUtils.HOST);
-    public static RemoteWebDriverWait wait = null;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
@@ -62,6 +61,5 @@ public class BaseHybridDriver extends GenericSauceDriver {
         globalDriver.get().get(host);
         globalXMLDriver.set(new SOAPClient());
         globalLogger.get().info("Starting URL: " + globalDriver.get().getCurrentUrl());
-        wait = new RemoteWebDriverWait(rwd, DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
     }
 }

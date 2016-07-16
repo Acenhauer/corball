@@ -31,7 +31,7 @@ public class BaseWebDriver extends GenericSauceDriver {
                 globalDriver,
                 globalBrowserCapabilities,
                 sessionId,
-                method, wait, hub, browserName,
+                method, hub, browserName,
                 DRIVER_SELENIUM_TIMEOUT_MILISECONDS, host);
     }
 }
