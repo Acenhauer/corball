@@ -1,24 +1,23 @@
-package com.acenhauer.corball.drivers;
+package com.acenhauer.corball.selenium;
 
 import com.acenhauer.corball.saucelabs.*;
-import com.acenhauer.corball.selenium.BrowserCapabilities;
-import com.acenhauer.corball.selenium.RemoteWebDriverWait;
-import com.acenhauer.corball.soap.SOAPClient;
 import com.acenhauer.corball.utils.PropertiesUtils;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
+import java.lang.reflect.Method;
 import java.util.Properties;
 
 /**
- * Created by guillem on 15/02/16.
+ * Created by guillem on 28/06/16.
  */
 @Listeners({SauceOnDemandTestListener.class})
-public class GenericSauceDriver
-        implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
+public class BaseCucumber extends AbstractTestNGCucumberTests implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
+
     public static final Properties testProperties =
             PropertiesUtils.getProcessedTestProperties();
     public static final String host = testProperties.getProperty(PropertiesUtils.HOST);
@@ -29,10 +28,11 @@ public class GenericSauceDriver
     public InheritableThreadLocal<String> sessionId = new InheritableThreadLocal<>();
     public InheritableThreadLocal<RemoteWebDriver> globalDriver = new InheritableThreadLocal<>();
     public InheritableThreadLocal<Logger> globalLogger = new InheritableThreadLocal<Logger>();
-    public InheritableThreadLocal<SOAPClient> globalXMLDriver =
-            new InheritableThreadLocal<SOAPClient>();
     public InheritableThreadLocal<BrowserCapabilities> globalBrowserCapabilities =
             new InheritableThreadLocal<BrowserCapabilities>();
+    public static final int DRIVER_SELENIUM_TIMEOUT_MILISECONDS = 60000;
+    public static final String browserName =
+            testProperties.getProperty(PropertiesUtils.BROWSER);
 
     protected RemoteWebDriver driver() {
         return globalDriver.get();
@@ -42,40 +42,32 @@ public class GenericSauceDriver
         return globalLogger.get();
     }
 
-    /**
-     * @return the Sauce Job id for the current thread
-     */
-    public String getSessionId() {
-        return sessionId.get();
+
+    @BeforeTest
+    public void setUp(Method method, Object[] testArguments) {
+        StartWebDriver startWebDriver = new StartWebDriver();
+        startWebDriver.startWebDriver(globalLogger,
+                globalDriver,
+                globalBrowserCapabilities,
+                sessionId,
+                method, hub, browserName,
+                DRIVER_SELENIUM_TIMEOUT_MILISECONDS, host);
     }
 
-    /**
-     * @return the host used for the test
-     */
-    public String getHost() {
-        return host;
+    @AfterTest
+    public void tearDown() {
+        driver().quit();
     }
 
-    /**
-     * @return the {@link SauceOnDemandAuthentication} instance containing the Sauce username/access key
-     */
     @Override
     public SauceOnDemandAuthentication getAuthentication() {
         return authentication;
     }
 
-    protected SOAPClient xmlDriver() {
-        return globalXMLDriver.get();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    protected void teardown(ITestResult tr) {
-        globalDriver.get().quit();
-        if (tr.isSuccess()) {
-            logger().info(getSessionId() + " PASSED! ");
-        } else {
-            logger().info(getSessionId() + " FAILED! ");
-        }
-        globalLogger.get().info("Finished execution for testcase " + getSessionId());
+    /**
+     * @return the Sauce Job id for the current thread
+     */
+    public String getSessionId() {
+        return sessionId.get();
     }
 }

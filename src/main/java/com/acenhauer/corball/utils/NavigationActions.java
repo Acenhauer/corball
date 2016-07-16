@@ -18,6 +18,15 @@ public class NavigationActions extends Locators {
 
     private static final Logger LOGGER = Logger.getLogger(NavigationActions.class);
 
+    protected final WebDriver driver;
+    public final RemoteWebDriverWait wait;
+
+    public NavigationActions(WebDriver driver) {
+        this.driver = driver;
+        this.wait =
+                new RemoteWebDriverWait(driver, BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
+    }
+
     public static void hoverAndClick(WebDriver driver, String objectId) {
         Actions action = new Actions(driver);
         WebElement elem = driver.findElement(identifyLocationStrategy(objectId));
