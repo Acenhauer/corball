@@ -30,7 +30,6 @@ public class BaseCucumber extends AbstractTestNGCucumberTests implements SauceOn
     public InheritableThreadLocal<Logger> globalLogger = new InheritableThreadLocal<Logger>();
     public InheritableThreadLocal<BrowserCapabilities> globalBrowserCapabilities =
             new InheritableThreadLocal<BrowserCapabilities>();
-    public static RemoteWebDriverWait wait = null;
     public static final int DRIVER_SELENIUM_TIMEOUT_MILISECONDS = 60000;
     public static final String browserName =
             testProperties.getProperty(PropertiesUtils.BROWSER);
@@ -51,7 +50,7 @@ public class BaseCucumber extends AbstractTestNGCucumberTests implements SauceOn
                 globalDriver,
                 globalBrowserCapabilities,
                 sessionId,
-                method, wait, hub, browserName,
+                method, hub, browserName,
                 DRIVER_SELENIUM_TIMEOUT_MILISECONDS, host);
     }
 
