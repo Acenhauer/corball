@@ -26,17 +26,9 @@ public class NavigationActions extends Locators {
         this.wait =
                 new RemoteWebDriverWait(driver, BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
     }
-
-    public static void hoverAndClick(WebDriver driver, String objectId) {
-        Actions action = new Actions(driver);
-        WebElement elem = driver.findElement(identifyLocationStrategy(objectId));
-        action.moveToElement(elem).moveToElement(elem).click(elem).build().perform();
-    }
-
-    public static void hoverElement(WebDriver driver, String objectId) {
-        Actions action = new Actions(driver);
-        WebElement elem = driver.findElement(identifyLocationStrategy(objectId));
-        action.moveToElement(elem).moveToElement(elem).perform();
+    
+    public static void click(WebDriver driver, WebElement webElement) {
+        webElement.click();
     }
 
     public static void click(WebDriver driver, String objectId) {
@@ -71,16 +63,24 @@ public class NavigationActions extends Locators {
     public static void hoverAndClick(WebDriver driver, WebElement webElement) {
         Actions action = new Actions(driver);
         action.moveToElement(webElement).moveToElement(webElement).click(webElement).build()
-            .perform();
+                .perform();
+    }
+
+    public static void hoverAndClick(WebDriver driver, String objectId) {
+        Actions action = new Actions(driver);
+        WebElement elem = driver.findElement(identifyLocationStrategy(objectId));
+        action.moveToElement(elem).moveToElement(elem).click(elem).build().perform();
+    }
+
+    public static void hoverElement(WebDriver driver, String objectId) {
+        Actions action = new Actions(driver);
+        WebElement elem = driver.findElement(identifyLocationStrategy(objectId));
+        action.moveToElement(elem).moveToElement(elem).perform();
     }
 
     public static void hoverElement(WebDriver driver, WebElement webElement) {
         Actions action = new Actions(driver);
         action.moveToElement(webElement).moveToElement(webElement).perform();
-    }
-
-    public static void click(WebDriver driver, WebElement webElement) {
-        webElement.click();
     }
 
     public static WebElement getLastWebelement(WebDriver driver, List<WebElement> webElements) {
@@ -101,14 +101,14 @@ public class NavigationActions extends Locators {
             webElement.isEnabled();
         } catch (NoSuchElementException e) {
             driver.manage().timeouts()
-                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
-                    TimeUnit.MILLISECONDS);
+                    .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                            TimeUnit.MILLISECONDS);
             LOGGER.info(e);
             return false;
         }
         driver.manage().timeouts()
-            .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
-                TimeUnit.MILLISECONDS);
+                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                        TimeUnit.MILLISECONDS);
         return true;
     }
 
@@ -118,21 +118,23 @@ public class NavigationActions extends Locators {
             webElement.isEnabled();
         } catch (NoSuchElementException e) {
             driver.manage().timeouts()
-              .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
-                TimeUnit.MILLISECONDS);
-            if(logInfo) {LOGGER.info(e);}
+                    .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                            TimeUnit.MILLISECONDS);
+            if (logInfo) {
+                LOGGER.info(e);
+            }
             return false;
         }
         driver.manage().timeouts()
-          .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
-            TimeUnit.MILLISECONDS);
+                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                        TimeUnit.MILLISECONDS);
         return true;
     }
 
     public static Boolean WaitForElement(WebDriver driver, WebElement element) {
         try {
             WebElement elementResponse =
-                (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(element));
+                    (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(element));
             return WebElementExists(driver, elementResponse);
         } catch (TimeoutException TimeOut) {
             LOGGER.info(TimeOut);
@@ -171,8 +173,8 @@ public class NavigationActions extends Locators {
         String xpahtLocation = element.toString();
         try {
             xpahtLocation =
-                xpahtLocation.substring(xpahtLocation.indexOf("//"), xpahtLocation.length() - 1)
-                    .trim();
+                    xpahtLocation.substring(xpahtLocation.indexOf("//"), xpahtLocation.length() - 1)
+                            .trim();
         } catch (Exception e) {
             LOGGER.info(e);
             xpahtLocation = "-1";
@@ -190,7 +192,7 @@ public class NavigationActions extends Locators {
      * @return
      */
     public static boolean waitForElementPresent(WebDriver driver, WebElement element,
-        RemoteWebDriverWait wait) {
+                                                RemoteWebDriverWait wait) {
         int i = 0;
         while (!WebElementExists(driver, element) && i < 20) {
             wait.pause(1000);
