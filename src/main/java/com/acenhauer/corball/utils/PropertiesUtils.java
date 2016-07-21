@@ -20,6 +20,7 @@ public class PropertiesUtils {
     public static final String DEVICE = "device";
     public static final String PLATFORMVERSION = "platformversion";
     public static final String APPABSOLUTEPATH = "apkAbsolutePath";
+    public static final String SAUCE = "sauce";
 
     /**
      * Loads a properties file using namespace as file name. If the file is not found returns an empty properties file.

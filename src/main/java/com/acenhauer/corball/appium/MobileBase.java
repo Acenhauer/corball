@@ -6,7 +6,8 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -20,13 +21,13 @@ public class MobileBase extends GenericSauceDriver {
     public static final String device = testProperties.getProperty(PropertiesUtils.DEVICE);
     public static final String platformVersion = testProperties.getProperty(PropertiesUtils.PLATFORMVERSION);
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeSuite
     public void setUp(Method method) throws MalformedURLException {
         // switch between different browsers, e.g. iOS Safari or Android Chrome
         // let's use the os name to differentiate, because we only use default browser in that os
         if (device != null && device.equalsIgnoreCase("Android")) {
             DesiredCapabilities caps = DesiredCapabilities.android();
-            caps.setCapability("appiumVersion", "1.4.16");
+            caps.setCapability("appiumVersion", "1.5.3");
             caps.setCapability("deviceName", "Android Emulator");
             caps.setCapability("deviceType", "phone");
             caps.setCapability("deviceOrientation", "portrait");
@@ -41,8 +42,8 @@ public class MobileBase extends GenericSauceDriver {
             globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } else {
             DesiredCapabilities caps = DesiredCapabilities.iphone();
-            caps.setCapability("appiumVersion", "1.4.16");
-            caps.setCapability("deviceName", "iPhone 6");
+            caps.setCapability("appiumVersion", "1.5.3");
+            caps.setCapability("deviceName", "iPhone Simulator");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("platformVersion", platformVersion);
             caps.setCapability("platformName", "iOS");
@@ -54,5 +55,11 @@ public class MobileBase extends GenericSauceDriver {
             globalDriver.set(driver);
             globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         }
+    }
+
+    @AfterSuite
+    public void tearDown() {
+        globalDriver.get().quit();
+        globalDriver.get().close();
     }
 }
