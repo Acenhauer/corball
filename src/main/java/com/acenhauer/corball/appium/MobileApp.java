@@ -2,7 +2,7 @@ package com.acenhauer.corball.appium;
 
 import com.acenhauer.corball.drivers.GenericSauceDriver;
 import com.acenhauer.corball.saucelabs.SauceHubParser;
-import com.acenhauer.corball.saucelabs.SauceREST;
+import com.acenhauer.corball.saucelabs.SauceStorageUpload;
 import com.acenhauer.corball.utils.PropertiesUtils;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -29,6 +29,8 @@ public class MobileApp extends GenericSauceDriver {
     public static final String platformVersion = testProperties.getProperty(PropertiesUtils.PLATFORMVERSION);
     public static final String appAbsolutePath =
             testProperties.getProperty(PropertiesUtils.APPABSOLUTEPATH);
+    public static final String runningOnSauce =
+            testProperties.getProperty(PropertiesUtils.SAUCE);
 
     public String getAppFolder(String appAbsolutePath) {
         Path currentRelativePath = Paths.get("");
@@ -51,15 +53,20 @@ public class MobileApp extends GenericSauceDriver {
         // switch between different browsers, e.g. iOS Safari or Android Chrome
         // let's use the os name to differentiate, because we only use default browser in that os
         if (device != null && device.equalsIgnoreCase("Android")) {
-            useSauceStorage(appAbsolutePath);
             DesiredCapabilities caps = DesiredCapabilities.android();
+            caps.setCapability("appiumVersion", "1.5.3");
             caps.setCapability("deviceName", "Android Emulator");
             caps.setCapability("deviceType", "phone");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("browserName", "");
             caps.setCapability("platformVersion", platformVersion);
             caps.setCapability("platformName", "Android");
-            caps.setCapability("app", "sauce-storage:" + getAppFile(appAbsolutePath));
+            if (runningOnSauce.equalsIgnoreCase("true")) {
+                useSauceStorage();
+                caps.setCapability("app", "sauce-storage:" + getAppFile(appAbsolutePath));
+            } else {
+                caps.setCapability("app", getAppFile(appAbsolutePath));
+            }
             caps.setCapability("id", method.getName());
             caps.setCapability("name", method.getName());
             RemoteWebDriver driver = new AndroidDriver(new URL(hub), caps);
@@ -68,12 +75,18 @@ public class MobileApp extends GenericSauceDriver {
             globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } else {
             DesiredCapabilities caps = DesiredCapabilities.iphone();
-            caps.setCapability("deviceName", "iPhone 6");
+            caps.setCapability("appiumVersion", "1.5.3");
+            caps.setCapability("deviceName", "iPhone 6 Simulator");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("platformVersion", platformVersion);
             caps.setCapability("platformName", "iOS");
             caps.setCapability("browserName", "");
-            caps.setCapability("app", appAbsolutePath);
+            if (runningOnSauce.equalsIgnoreCase("true")) {
+                useSauceStorage();
+                caps.setCapability("app", "sauce-storage:" + getAppFile(appAbsolutePath));
+            } else {
+                caps.setCapability("app", getAppFile(appAbsolutePath));
+            }
             caps.setCapability("id", method.getName());
             caps.setCapability("name", method.getName());
             RemoteWebDriver driver = new IOSDriver(new URL(hub), caps);
@@ -83,9 +96,8 @@ public class MobileApp extends GenericSauceDriver {
         }
     }
 
-    public void useSauceStorage(String appFile) throws IOException {
-        SauceREST sauceREST = new SauceREST(SauceHubParser.getUserSaucelabs(hub), SauceHubParser.getApikeySaucelabs(hub));
-        File resourceFile = new File(appFile);
-        sauceREST.uploadFile(resourceFile, resourceFile.getName(), true);
+    public void useSauceStorage() throws IOException {
+        SauceStorageUpload sauceUploadFile = new SauceStorageUpload();
+        sauceUploadFile.uploadFile(SauceHubParser.getUserSaucelabs(hub), SauceHubParser.getApikeySaucelabs(hub), appAbsolutePath);
     }
 }
