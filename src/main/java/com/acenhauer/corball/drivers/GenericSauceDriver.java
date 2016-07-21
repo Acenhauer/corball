@@ -67,15 +67,4 @@ public class GenericSauceDriver
     protected SOAPClient xmlDriver() {
         return globalXMLDriver.get();
     }
-
-    @AfterMethod(alwaysRun = true)
-    protected void teardown(ITestResult tr) {
-        globalDriver.get().quit();
-        if (tr.isSuccess()) {
-            logger().info(getSessionId() + " PASSED! ");
-        } else {
-            logger().info(getSessionId() + " FAILED! ");
-        }
-        globalLogger.get().info("Finished execution for testcase " + getSessionId());
-    }
 }
