@@ -4,11 +4,12 @@ import com.acenhauer.corball.drivers.GenericSauceDriver;
 import com.acenhauer.corball.saucelabs.SauceHubParser;
 import com.acenhauer.corball.saucelabs.SauceStorageUpload;
 import com.acenhauer.corball.utils.PropertiesUtils;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
  * Created by guillemhs on 2015-11-29.
  */
 public class MobileApp extends GenericSauceDriver {
+    public AppiumDriver driver;
     public static final Properties testProperties =
             PropertiesUtils.getProcessedTestProperties();
     public static final String device = testProperties.getProperty(PropertiesUtils.DEVICE);
@@ -48,7 +50,7 @@ public class MobileApp extends GenericSauceDriver {
         return parts[parts.length - 1];
     }
 
-    @BeforeMethod
+    @BeforeSuite
     public void setUp(Method method) throws IOException {
         // switch between different browsers, e.g. iOS Safari or Android Chrome
         // let's use the os name to differentiate, because we only use default browser in that os
@@ -69,14 +71,14 @@ public class MobileApp extends GenericSauceDriver {
             }
             caps.setCapability("id", method.getName());
             caps.setCapability("name", method.getName());
-            RemoteWebDriver driver = new AndroidDriver(new URL(hub), caps);
+            driver = new AndroidDriver(new URL(hub), caps);
             sessionId.set(driver.getSessionId().toString());
-            globalDriver.set(driver);
-            globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            globalAppiumDriver.set(driver);
+            globalAppiumDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         } else {
             DesiredCapabilities caps = DesiredCapabilities.iphone();
             caps.setCapability("appiumVersion", "1.5.3");
-            caps.setCapability("deviceName", "iPhone 6 Simulator");
+            caps.setCapability("deviceName", "iPhone 6");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("platformVersion", platformVersion);
             caps.setCapability("platformName", "iOS");
@@ -89,15 +91,21 @@ public class MobileApp extends GenericSauceDriver {
             }
             caps.setCapability("id", method.getName());
             caps.setCapability("name", method.getName());
-            RemoteWebDriver driver = new IOSDriver(new URL(hub), caps);
+            driver = new IOSDriver(new URL(hub), caps);
             sessionId.set(driver.getSessionId().toString());
-            globalDriver.set(driver);
-            globalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            globalAppiumDriver.set(driver);
+            globalAppiumDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         }
     }
 
     public void useSauceStorage() throws IOException {
         SauceStorageUpload sauceUploadFile = new SauceStorageUpload();
         sauceUploadFile.uploadFile(SauceHubParser.getUserSaucelabs(hub), SauceHubParser.getApikeySaucelabs(hub), appAbsolutePath);
+    }
+
+    @AfterSuite
+    public void tearDown() {
+        globalAppiumDriver.get().quit();
+        globalAppiumDriver.get().close();
     }
 }
