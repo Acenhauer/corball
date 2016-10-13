@@ -1,6 +1,7 @@
 package com.acenhauer.corball.selenium;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -24,7 +25,7 @@ public class StartWebDriver {
                                InheritableThreadLocal<String> sessionId,
                                Method method, String hub, String browserName,
                                int timeOut, String host) {
-        globalLogger.set(Logger.getLogger(BaseWebDriver.class));
+        globalLogger.set((Logger) LogManager.getLogger(BaseWebDriver.class));
         globalBrowserCapabilities.set(new BrowserCapabilities());
         RemoteWebDriver rwd = null;
         try {
@@ -33,8 +34,7 @@ public class StartWebDriver {
                             method.getName() + "-" + UUID.randomUUID());
             rwd = new RemoteWebDriver(new URL(hub), caps);
             sessionId.set(rwd.getSessionId().toString());
-            globalLogger.get()
-                    .info("Starting " + browserName + " using sessionId " + rwd.getSessionId().toString());
+            globalLogger.get().info("Starting " + browserName + " using sessionId " + rwd.getSessionId().toString());
         } catch (MalformedURLException e) {
             globalLogger.get().info(e);
         }

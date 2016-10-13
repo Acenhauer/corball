@@ -1,6 +1,7 @@
 package com.acenhauer.corball.saucelabs;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -22,16 +23,18 @@ import java.util.List;
  */
 class SauceSSLSocketFactory extends SSLSocketFactory {
 
-    private static final Logger LOGGER = Logger.getLogger(SauceSSLSocketFactory.class);
+    private static final Logger LOGGER = LogManager.getLogger(SauceSSLSocketFactory.class);
     private SSLContext m_ctx;
     private String[] m_ciphers;
     private String[] m_protocols;
 
-    @Override public String[] getDefaultCipherSuites() {
+    @Override
+    public String[] getDefaultCipherSuites() {
         return m_ciphers;
     }
 
-    @Override public String[] getSupportedCipherSuites() {
+    @Override
+    public String[] getSupportedCipherSuites() {
         return m_ciphers;
     }
 
@@ -48,17 +51,18 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
     }
 
     public SauceSSLSocketFactory(KeyManager[] km, TrustManager[] tm, SecureRandom random)
-        throws NoSuchAlgorithmException, KeyManagementException {
+            throws NoSuchAlgorithmException, KeyManagementException {
         initSSLSocketFactoryEx(km, tm, random);
     }
 
     public SauceSSLSocketFactory(SSLContext ctx)
-        throws NoSuchAlgorithmException, KeyManagementException {
+            throws NoSuchAlgorithmException, KeyManagementException {
         initSSLSocketFactoryEx(ctx);
     }
 
-    @Override public Socket createSocket(Socket s, String host, int port, boolean autoClose)
-        throws IOException {
+    @Override
+    public Socket createSocket(Socket s, String host, int port, boolean autoClose)
+            throws IOException {
         SSLSocketFactory factory = m_ctx.getSocketFactory();
         SSLSocket ss = (SSLSocket) factory.createSocket(s, host, port, autoClose);
 
@@ -68,8 +72,9 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
         return ss;
     }
 
-    @Override public Socket createSocket(InetAddress address, int port, InetAddress localAddress,
-        int localPort) throws IOException {
+    @Override
+    public Socket createSocket(InetAddress address, int port, InetAddress localAddress,
+                               int localPort) throws IOException {
         SSLSocketFactory factory = m_ctx.getSocketFactory();
         SSLSocket ss = (SSLSocket) factory.createSocket(address, port, localAddress, localPort);
 
@@ -81,7 +86,7 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
 
     @Override
     public Socket createSocket(String host, int port, InetAddress localHost, int localPort)
-        throws IOException {
+            throws IOException {
         SSLSocketFactory factory = m_ctx.getSocketFactory();
         SSLSocket ss = (SSLSocket) factory.createSocket(host, port, localHost, localPort);
 
@@ -91,7 +96,8 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
         return ss;
     }
 
-    @Override public Socket createSocket(InetAddress host, int port) throws IOException {
+    @Override
+    public Socket createSocket(InetAddress host, int port) throws IOException {
         SSLSocketFactory factory = m_ctx.getSocketFactory();
         SSLSocket ss = (SSLSocket) factory.createSocket(host, port);
 
@@ -101,7 +107,8 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
         return ss;
     }
 
-    @Override public Socket createSocket(String host, int port) throws IOException {
+    @Override
+    public Socket createSocket(String host, int port) throws IOException {
         SSLSocketFactory factory = m_ctx.getSocketFactory();
         SSLSocket ss = (SSLSocket) factory.createSocket(host, port);
 
@@ -112,7 +119,7 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
     }
 
     private void initSSLSocketFactoryEx(KeyManager[] km, TrustManager[] tm, SecureRandom random)
-        throws NoSuchAlgorithmException, KeyManagementException {
+            throws NoSuchAlgorithmException, KeyManagementException {
         m_ctx = SSLContext.getInstance("TLS");
         m_ctx.init(km, tm, random);
 
@@ -121,7 +128,7 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
     }
 
     private void initSSLSocketFactoryEx(SSLContext ctx)
-        throws NoSuchAlgorithmException, KeyManagementException {
+            throws NoSuchAlgorithmException, KeyManagementException {
         m_ctx = ctx;
 
         m_protocols = GetProtocolList();
@@ -142,7 +149,7 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
             Arrays.sort(availableProtocols);
         } catch (Exception e) {
             LOGGER.info(e);
-            return new String[] {"TLSv1"};
+            return new String[]{"TLSv1"};
         } finally {
             if (socket != null) {
                 try {
@@ -166,39 +173,39 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
     protected String[] GetCipherList() {
         String[] preferredCiphers = {
 
-            // *_CHACHA20_POLY1305 are 3x to 4x faster than existing cipher suites.
-            //   http://googleonlinesecurity.blogspot.com/2014/04/speeding-up-and-strengthening-https.html
-            // Use them if available. Normative names can be found at (TLS spec depends on IPSec spec):
-            //   http://tools.ietf.org/html/draft-nir-ipsecme-chacha20-poly1305-01
-            //   http://tools.ietf.org/html/draft-mavrogiannopoulos-chacha-tls-02
-            "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
-            "TLS_ECDHE_ECDSA_WITH_CHACHA20_SHA", "TLS_ECDHE_RSA_WITH_CHACHA20_SHA",
+                // *_CHACHA20_POLY1305 are 3x to 4x faster than existing cipher suites.
+                //   http://googleonlinesecurity.blogspot.com/2014/04/speeding-up-and-strengthening-https.html
+                // Use them if available. Normative names can be found at (TLS spec depends on IPSec spec):
+                //   http://tools.ietf.org/html/draft-nir-ipsecme-chacha20-poly1305-01
+                //   http://tools.ietf.org/html/draft-mavrogiannopoulos-chacha-tls-02
+                "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305", "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+                "TLS_ECDHE_ECDSA_WITH_CHACHA20_SHA", "TLS_ECDHE_RSA_WITH_CHACHA20_SHA",
 
-            "TLS_DHE_RSA_WITH_CHACHA20_POLY1305", "TLS_RSA_WITH_CHACHA20_POLY1305",
-            "TLS_DHE_RSA_WITH_CHACHA20_SHA", "TLS_RSA_WITH_CHACHA20_SHA",
+                "TLS_DHE_RSA_WITH_CHACHA20_POLY1305", "TLS_RSA_WITH_CHACHA20_POLY1305",
+                "TLS_DHE_RSA_WITH_CHACHA20_SHA", "TLS_RSA_WITH_CHACHA20_SHA",
 
-            // Done with bleeding edge, back to TLS v1.2 and below
-            "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384", "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
-            "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256", "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+                // Done with bleeding edge, back to TLS v1.2 and below
+                "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384", "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+                "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256", "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
 
-            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "TLS_DHE_DSS_WITH_AES_256_GCM_SHA384",
-            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", "TLS_DHE_DSS_WITH_AES_128_GCM_SHA256",
+                "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384", "TLS_DHE_DSS_WITH_AES_256_GCM_SHA384",
+                "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256", "TLS_DHE_DSS_WITH_AES_128_GCM_SHA256",
 
-            // TLS v1.0 (with some SSLv3 interop)
-            "TLS_DHE_RSA_WITH_AES_256_CBC_SHA384", "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
-            "TLS_DHE_RSA_WITH_AES_128_CBC_SHA", "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+                // TLS v1.0 (with some SSLv3 interop)
+                "TLS_DHE_RSA_WITH_AES_256_CBC_SHA384", "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+                "TLS_DHE_RSA_WITH_AES_128_CBC_SHA", "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
 
-            "TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA", "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
-            "SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA", "SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA",
+                "TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA", "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+                "SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA", "SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA",
 
-            // RSA key transport sucks, but they are needed as a fallback.
-            // For example, microsoft.com fails under all versions of TLS
-            // if they are not included. If only TLS 1.0 is available at
-            // the client, then google.com will fail too. TLS v1.3 is
-            // trying to deprecate them, so it will be interesteng to see
-            // what happens.
-            "TLS_RSA_WITH_AES_256_CBC_SHA256", "TLS_RSA_WITH_AES_256_CBC_SHA",
-            "TLS_RSA_WITH_AES_128_CBC_SHA256", "TLS_RSA_WITH_AES_128_CBC_SHA"};
+                // RSA key transport sucks, but they are needed as a fallback.
+                // For example, microsoft.com fails under all versions of TLS
+                // if they are not included. If only TLS 1.0 is available at
+                // the client, then google.com will fail too. TLS v1.3 is
+                // trying to deprecate them, so it will be interesteng to see
+                // what happens.
+                "TLS_RSA_WITH_AES_256_CBC_SHA256", "TLS_RSA_WITH_AES_256_CBC_SHA",
+                "TLS_RSA_WITH_AES_128_CBC_SHA256", "TLS_RSA_WITH_AES_128_CBC_SHA"};
 
         String[] availableCiphers = null;
 
@@ -208,11 +215,11 @@ class SauceSSLSocketFactory extends SSLSocketFactory {
             Arrays.sort(availableCiphers);
         } catch (Exception e) {
             LOGGER.info(e);
-            return new String[] {"TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
-                "TLS_DHE_DSS_WITH_AES_256_CBC_SHA", "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
-                "TLS_DHE_RSA_WITH_AES_256_CBC_SHA", "TLS_RSA_WITH_AES_256_CBC_SHA256",
-                "TLS_RSA_WITH_AES_256_CBC_SHA", "TLS_RSA_WITH_AES_128_CBC_SHA256",
-                "TLS_RSA_WITH_AES_128_CBC_SHA", "TLS_EMPTY_RENEGOTIATION_INFO_SCSV"};
+            return new String[]{"TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+                    "TLS_DHE_DSS_WITH_AES_256_CBC_SHA", "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+                    "TLS_DHE_RSA_WITH_AES_256_CBC_SHA", "TLS_RSA_WITH_AES_256_CBC_SHA256",
+                    "TLS_RSA_WITH_AES_256_CBC_SHA", "TLS_RSA_WITH_AES_128_CBC_SHA256",
+                    "TLS_RSA_WITH_AES_128_CBC_SHA", "TLS_EMPTY_RENEGOTIATION_INFO_SCSV"};
         }
 
         List<String> aa = new ArrayList<String>();

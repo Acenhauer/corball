@@ -2,6 +2,7 @@ package com.acenhauer.corball.selenium;
 
 import com.acenhauer.corball.drivers.GenericSauceDriver;
 import com.acenhauer.corball.utils.PropertiesUtils;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
@@ -33,5 +34,10 @@ public class BaseWebDriver extends GenericSauceDriver {
                 sessionId,
                 method, hub, browserName,
                 DRIVER_SELENIUM_TIMEOUT_MILISECONDS, host);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown(Method method) {
+        globalDriver.get().quit();
     }
 }

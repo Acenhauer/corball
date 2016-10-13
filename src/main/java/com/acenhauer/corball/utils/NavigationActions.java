@@ -2,7 +2,8 @@ package com.acenhauer.corball.utils;
 
 import com.acenhauer.corball.selenium.BaseWebDriver;
 import com.acenhauer.corball.selenium.RemoteWebDriverWait;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class NavigationActions extends Locators {
 
-    private static final Logger LOGGER = Logger.getLogger(NavigationActions.class);
+    private static final Logger LOGGER = LogManager.getLogger(NavigationActions.class);
 
     protected final WebDriver driver;
     public final RemoteWebDriverWait wait;
@@ -26,7 +27,7 @@ public class NavigationActions extends Locators {
         this.wait =
                 new RemoteWebDriverWait(driver, BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
     }
-    
+
     public static void click(WebDriver driver, WebElement webElement) {
         webElement.click();
     }

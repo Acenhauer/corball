@@ -1,7 +1,8 @@
 package com.acenhauer.corball.saucelabs;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +20,7 @@ import java.util.Properties;
  */
 public class SauceOnDemandAuthentication {
 
-    private static final Logger LOGGER = Logger.getLogger(SauceOnDemandAuthentication.class);
+    private static final Logger LOGGER = LogManager.getLogger(SauceOnDemandAuthentication.class);
 
     /**
      * The username to use when connecting to Sauce OnDemand.  Defaults to empty string.
