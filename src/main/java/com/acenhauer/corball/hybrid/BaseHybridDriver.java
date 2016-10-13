@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
@@ -59,5 +60,10 @@ public class BaseHybridDriver extends GenericSauceDriver {
         globalDriver.get().get(host);
         globalXMLDriver.set(new SOAPClient());
         globalLogger.get().info("Starting URL: " + globalDriver.get().getCurrentUrl());
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown(Method method) {
+        globalDriver.get().quit();
     }
 }
