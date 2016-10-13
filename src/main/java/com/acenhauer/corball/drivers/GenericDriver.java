@@ -3,7 +3,7 @@ package com.acenhauer.corball.drivers;
 import com.acenhauer.corball.http.HttpClient;
 import com.acenhauer.corball.utils.PropertiesUtils;
 import com.acenhauer.corball.soap.SOAPClient;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
 
@@ -12,11 +12,11 @@ import java.util.Properties;
  */
 public class GenericDriver {
     public static final Properties testProperties =
-        PropertiesUtils.getProcessedTestProperties();
+            PropertiesUtils.getProcessedTestProperties();
     public InheritableThreadLocal<HttpClient> globalHttpDriver =
-        new InheritableThreadLocal<HttpClient>();
+            new InheritableThreadLocal<HttpClient>();
     public InheritableThreadLocal<SOAPClient> globalSoapDriver =
-        new InheritableThreadLocal<SOAPClient>();
+            new InheritableThreadLocal<SOAPClient>();
     public InheritableThreadLocal<Logger> globalLogger = new InheritableThreadLocal<Logger>();
     public String testName;
     public String testMethodName;

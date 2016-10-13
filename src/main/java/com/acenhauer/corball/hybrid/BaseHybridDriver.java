@@ -2,14 +2,12 @@ package com.acenhauer.corball.hybrid;
 
 import com.acenhauer.corball.drivers.GenericSauceDriver;
 import com.acenhauer.corball.selenium.BrowserCapabilities;
-import com.acenhauer.corball.selenium.RemoteWebDriverWait;
 import com.acenhauer.corball.soap.SOAPClient;
 import com.acenhauer.corball.utils.PropertiesUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
@@ -35,7 +33,7 @@ public class BaseHybridDriver extends GenericSauceDriver {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
-        globalLogger.set(Logger.getLogger(BaseHybridDriver.class));
+        globalLogger.set((Logger) LogManager.getLogger(BaseHybridDriver.class));
         globalBrowserCapabilities.set(new BrowserCapabilities());
         RemoteWebDriver rwd = null;
         try {

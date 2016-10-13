@@ -2,7 +2,7 @@ package com.acenhauer.corball.soap;
 
 import com.acenhauer.corball.drivers.GenericDriver;
 import com.acenhauer.corball.utils.PropertiesUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -23,7 +23,7 @@ public class BaseSoap extends GenericDriver {
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method) {
         globalSoapDriver.set(new SOAPClient());
-        globalLogger.set(Logger.getLogger(BaseSoap.class));
+        globalLogger.set(LogManager.getLogger(BaseSoap.class));
     }
 
     @AfterMethod(alwaysRun = true)

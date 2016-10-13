@@ -1,7 +1,8 @@
 package com.acenhauer.corball.selenium;
 
 import com.acenhauer.corball.utils.Locators;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  */
 public class RemoteWebDriverWait extends WebDriverWait {
 
-    private static final Logger LOGGER = Logger.getLogger(RemoteWebDriverWait.class);
+    private static final Logger LOGGER = LogManager.getLogger(RemoteWebDriverWait.class);
 
     private final WebDriver driver;
 
@@ -36,7 +37,8 @@ public class RemoteWebDriverWait extends WebDriverWait {
     public static ExpectedCondition<Boolean> isElementPresent(final WebElement element) {
         ExpectedCondition<Boolean> elementPresent = new ExpectedCondition<Boolean>() {
 
-            @Override public Boolean apply(WebDriver localDriver) {
+            @Override
+            public Boolean apply(WebDriver localDriver) {
                 return ExpectedConditions.visibilityOf(element) != null;
             }
         };
@@ -115,7 +117,7 @@ public class RemoteWebDriverWait extends WebDriverWait {
     }
 
     public Boolean forAsyncAttribute(WebElement e, String textValue, long milliseconds,
-        int retries) {
+                                     int retries) {
         // return true when the element is present
         // Up to n retries times
         for (int i = 0; i < retries; i++) {
@@ -135,9 +137,10 @@ public class RemoteWebDriverWait extends WebDriverWait {
     public ExpectedCondition<Boolean> areAllElementsPresent(final WebElement... elementsList) {
         ExpectedCondition<Boolean> elementsPresent = new ExpectedCondition<Boolean>() {
 
-            @Override public Boolean apply(WebDriver localDriver) {
+            @Override
+            public Boolean apply(WebDriver localDriver) {
                 return ExpectedConditions.visibilityOfAllElements(Arrays.asList(elementsList))
-                    != null;
+                        != null;
             }
         };
         return elementsPresent;
@@ -146,7 +149,8 @@ public class RemoteWebDriverWait extends WebDriverWait {
     public ExpectedCondition<Boolean> not(final ExpectedCondition<?> toInvert) {
         return new ExpectedCondition<Boolean>() {
 
-            @Override public Boolean apply(WebDriver localDriver) {
+            @Override
+            public Boolean apply(WebDriver localDriver) {
                 try {
                     Object result = toInvert.apply(driver);
                     return (result == null || result == Boolean.FALSE);
@@ -161,9 +165,10 @@ public class RemoteWebDriverWait extends WebDriverWait {
     public ExpectedCondition<Boolean> isPageAndAjaxLoaded() {
         ExpectedCondition<Boolean> pageLoaded = new ExpectedCondition<Boolean>() {
 
-            @Override public Boolean apply(WebDriver localDriver) {
+            @Override
+            public Boolean apply(WebDriver localDriver) {
                 return ((JavascriptExecutor) localDriver)
-                    .executeScript("return document.readyState").equals("complete");
+                        .executeScript("return document.readyState").equals("complete");
             }
         };
         return pageLoaded;
@@ -178,7 +183,8 @@ public class RemoteWebDriverWait extends WebDriverWait {
     }
 
     // Leaving this here just in case we want to add extra actions in the future.
-    @Override protected RuntimeException timeoutException(String message, Throwable lastException) {
+    @Override
+    protected RuntimeException timeoutException(String message, Throwable lastException) {
         return super.timeoutException(message, lastException);
     }
 }

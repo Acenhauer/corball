@@ -11,7 +11,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -22,13 +23,13 @@ import java.util.Map;
 
 public class HttpClient {
 
-    private static final Logger LOGGER = Logger.getLogger(HttpClient.class);
+    private static final Logger LOGGER = LogManager.getLogger(HttpClient.class);
 
     public HttpClient() {
     }
 
     public static String httpPost(String webServiceURL, Map<String, String> headers,
-        String xmlRequest) {
+                                  String xmlRequest) {
         StringBuilder body = new StringBuilder();
         DefaultHttpClient client = new DefaultHttpClient();
         BasicCookieStore cookieStore = new BasicCookieStore();
@@ -176,7 +177,7 @@ public class HttpClient {
     }
 
     public static String httpsExe(String webServiceURL, Map<String, String> headers, String request,
-        RequestMethod httpMethod) {
+                                  RequestMethod httpMethod) {
 
         LOGGER.info("Calling method: " + httpMethod.name() + "> " + webServiceURL);
         LOGGER.info("Request: " + request);
@@ -193,7 +194,7 @@ public class HttpClient {
             * Disable SSL Certificate validations
             * */
             // Create a trust manager that does not validate certificate chains
-            TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager() {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
@@ -219,8 +220,8 @@ public class HttpClient {
             HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 
             String signature = org.apache.commons.codec.digest.DigestUtils.sha256Hex(
-                BaseHttp.apiKey + BaseHttp.sharedSecret
-                    + System.currentTimeMillis() / 1000);
+                    BaseHttp.apiKey + BaseHttp.sharedSecret
+                            + System.currentTimeMillis() / 1000);
 
             URL url = new URL(webServiceURL);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -233,7 +234,7 @@ public class HttpClient {
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry) it.next();
                     connection
-                        .setRequestProperty(pair.getKey().toString(), pair.getValue().toString());
+                            .setRequestProperty(pair.getKey().toString(), pair.getValue().toString());
                 }
             }
 

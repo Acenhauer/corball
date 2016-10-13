@@ -2,14 +2,11 @@ package com.acenhauer.corball.drivers;
 
 import com.acenhauer.corball.saucelabs.*;
 import com.acenhauer.corball.selenium.BrowserCapabilities;
-import com.acenhauer.corball.selenium.RemoteWebDriverWait;
 import com.acenhauer.corball.soap.SOAPClient;
 import com.acenhauer.corball.utils.PropertiesUtils;
 import io.appium.java_client.AppiumDriver;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 
 import java.util.Properties;

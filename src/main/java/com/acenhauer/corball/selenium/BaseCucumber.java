@@ -3,7 +3,7 @@ package com.acenhauer.corball.selenium;
 import com.acenhauer.corball.saucelabs.*;
 import com.acenhauer.corball.utils.PropertiesUtils;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
