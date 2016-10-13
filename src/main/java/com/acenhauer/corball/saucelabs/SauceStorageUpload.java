@@ -1,7 +1,8 @@
 package com.acenhauer.corball.saucelabs;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.InputStreamReader;
 //curl -u <sauce_username>:<sauce_access_key> -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/<sauce_username>/<upload_filename>?overwrite=true --data-binary @<path/to/your_file_name>
 public class SauceStorageUpload {
 
-    private static final Logger LOGGER = Logger.getLogger(SauceStorageUpload.class);
+    private static final Logger LOGGER = LogManager.getLogger(SauceStorageUpload.class);
 
     public SauceStorageUpload() {
     }

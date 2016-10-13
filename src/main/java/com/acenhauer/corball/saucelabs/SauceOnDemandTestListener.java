@@ -1,6 +1,7 @@
 package com.acenhauer.corball.saucelabs;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
@@ -23,7 +24,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     private static final String SELENIUM_PLATFORM = "SELENIUM_PLATFORM";
     private static final String SELENIUM_VERSION = "SELENIUM_VERSION";
     private static final String SELENIUM_IS_LOCAL = "SELENIUM_IS_LOCAL";
-    private static final Logger logger = Logger.getLogger(SauceOnDemandTestListener.class);
+    private static final Logger logger = LogManager.getLogger(SauceOnDemandTestListener.class);
     public InheritableThreadLocal<String> sessionIdContainer = new InheritableThreadLocal<String>();
     /**
      * The underlying {@link SauceOnDemandSessionIdProvider} instance which contains the Selenium session id.  This is typically
@@ -53,7 +54,8 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
      *
      * @param testContext
      */
-    @Override public void onStart(ITestContext testContext) {
+    @Override
+    public void onStart(ITestContext testContext) {
         super.onStart(testContext);
         String local = SauceUtils.readPropertyOrEnv(SELENIUM_IS_LOCAL, "");
         if (local != null && !local.equals("")) {
@@ -76,7 +78,8 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     /**
      * @param result
      */
-    @Override public void onTestStart(ITestResult result) {
+    @Override
+    public void onTestStart(ITestResult result) {
         super.onTestStart(result);
 
         if (isLocal) {
@@ -88,7 +91,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
             //log the session id to the system out
             if (sessionIdProvider.getSessionId() != null) {
                 logger.info(String.format("SauceOnDemandSessionID=%1$s job-name=%2$s",
-                    sessionIdProvider.getSessionId(), result.getMethod().getMethodName()));
+                        sessionIdProvider.getSessionId(), result.getMethod().getMethodName()));
                 sessionIdContainer.set(sessionIdProvider.getSessionId());
             }
         }
@@ -96,20 +99,21 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
         if (result.getInstance() instanceof SauceOnDemandAuthenticationProvider) {
             //use the authentication information provided by the test class
             SauceOnDemandAuthenticationProvider provider =
-                (SauceOnDemandAuthenticationProvider) result.getInstance();
+                    (SauceOnDemandAuthenticationProvider) result.getInstance();
             sauceOnDemandAuthentication = provider.getAuthentication();
         } else {
             //otherwise use the default authentication
             sauceOnDemandAuthentication = new SauceOnDemandAuthentication();
         }
         this.sauceREST = new SauceREST(sauceOnDemandAuthentication.getUsername(),
-            sauceOnDemandAuthentication.getAccessKey());
+                sauceOnDemandAuthentication.getAccessKey());
     }
 
     /**
      * @param tr
      */
-    @Override public void onTestFailure(ITestResult tr) {
+    @Override
+    public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
         if (isLocal) {
             return;
@@ -144,7 +148,8 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     /**
      * @param tr
      */
-    @Override public void onTestSuccess(ITestResult tr) {
+    @Override
+    public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
         if (isLocal) {
             return;
