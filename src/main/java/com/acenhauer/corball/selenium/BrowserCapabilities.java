@@ -55,7 +55,8 @@ public class BrowserCapabilities {
 
     protected static ChromeOptions getChromeOptions() {
         ChromeOptions ops = new ChromeOptions();
-        ops.addArguments("start-maximized");
+        ops.addArguments("--start-maximized");
+        ops.addArguments("--kiosk");
         return ops;
     }
 
