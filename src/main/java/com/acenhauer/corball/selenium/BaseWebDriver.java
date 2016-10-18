@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  */
 public class BaseWebDriver extends GenericSauceDriver {
 
-    public static final int DRIVER_SELENIUM_TIMEOUT_MILISECONDS = 20000;
+    public static final int DRIVER_SELENIUM_TIMEOUT_SECONDS = 30;
     public static final String browserName =
             testProperties.getProperty(PropertiesUtils.BROWSER);
     public static final String user = testProperties.getProperty(PropertiesUtils.USER);
@@ -32,8 +32,8 @@ public class BaseWebDriver extends GenericSauceDriver {
                 globalBrowserCapabilities,
                 sessionId,
                 method, hub, browserName,
-                DRIVER_SELENIUM_TIMEOUT_MILISECONDS, host);
-        wait = new RemoteWebDriverWait(globalDriver.get(), DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
+                DRIVER_SELENIUM_TIMEOUT_SECONDS, host);
+        wait = new RemoteWebDriverWait(globalDriver.get(), DRIVER_SELENIUM_TIMEOUT_SECONDS);
     }
 
     @AfterMethod(alwaysRun = true)

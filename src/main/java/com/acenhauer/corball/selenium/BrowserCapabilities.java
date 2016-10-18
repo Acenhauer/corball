@@ -20,7 +20,7 @@ public class BrowserCapabilities {
     }
 
     protected static FirefoxProfile getFirefoxProfile() {
-        final int firefoxBrowserProfileWait = BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS;
+        final int firefoxBrowserProfileWait = BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS;
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         // Browser Timeouts to handle async scripts.
         firefoxProfile.setPreference("dom.max_chrome_script_run_time", firefoxBrowserProfileWait);
