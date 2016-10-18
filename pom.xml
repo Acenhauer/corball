@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.10.13</version>
+    <version>16.10.18-SNAPSHOT</version>
     <name>Corball</name>
     <description>Corball - The Automation Framework</description>
     <url>https://github.com/Acenhauer/corball-test-automation-demo</url>
@@ -151,7 +151,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.0.0-beta4</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>io.appium</groupId>
