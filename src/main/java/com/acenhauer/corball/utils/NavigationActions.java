@@ -201,4 +201,12 @@ public class NavigationActions extends Locators {
         }
         return WebElementExists(driver, element);
     }
+
+    public void listIframesFromPage(WebDriver driver) {
+        final List<WebElement> iframes = driver.findElements(By.tagName("frame"));
+        for (WebElement iframe : iframes) {
+            LOGGER.info(iframe.getAttribute("id"));
+            LOGGER.info(iframe.getAttribute("name"));
+        }
+    }
 }
