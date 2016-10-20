@@ -20,7 +20,7 @@ public class BrowserCapabilities {
     }
 
     protected static FirefoxProfile getFirefoxProfile() {
-        final int firefoxBrowserProfileWait = BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS;
+        final int firefoxBrowserProfileWait = BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS;
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         // Browser Timeouts to handle async scripts.
         firefoxProfile.setPreference("dom.max_chrome_script_run_time", firefoxBrowserProfileWait);
@@ -55,7 +55,8 @@ public class BrowserCapabilities {
 
     protected static ChromeOptions getChromeOptions() {
         ChromeOptions ops = new ChromeOptions();
-        ops.addArguments("start-maximized");
+        ops.addArguments("--start-maximized");
+        ops.addArguments("--kiosk");
         return ops;
     }
 
@@ -81,7 +82,6 @@ public class BrowserCapabilities {
                 caps.setCapability("id", testName);
                 caps.setCapability("name", testName);
                 caps.setCapability("chrome.prefs", getChromePrefs());
-                caps.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
                 return caps;
             } else if (browser.equalsIgnoreCase("IE")) {
                 caps = DesiredCapabilities.internetExplorer();

@@ -25,7 +25,7 @@ public class NavigationActions extends Locators {
     public NavigationActions(WebDriver driver) {
         this.driver = driver;
         this.wait =
-                new RemoteWebDriverWait(driver, BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS);
+                new RemoteWebDriverWait(driver, BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS);
     }
 
     public static void click(WebDriver driver, WebElement webElement) {
@@ -102,13 +102,13 @@ public class NavigationActions extends Locators {
             webElement.isEnabled();
         } catch (NoSuchElementException e) {
             driver.manage().timeouts()
-                    .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                    .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS,
                             TimeUnit.MILLISECONDS);
             LOGGER.info(e);
             return false;
         }
         driver.manage().timeouts()
-                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS,
                         TimeUnit.MILLISECONDS);
         return true;
     }
@@ -119,7 +119,7 @@ public class NavigationActions extends Locators {
             webElement.isEnabled();
         } catch (NoSuchElementException e) {
             driver.manage().timeouts()
-                    .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                    .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS,
                             TimeUnit.MILLISECONDS);
             if (logInfo) {
                 LOGGER.info(e);
@@ -127,7 +127,7 @@ public class NavigationActions extends Locators {
             return false;
         }
         driver.manage().timeouts()
-                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_MILISECONDS,
+                .implicitlyWait(BaseWebDriver.DRIVER_SELENIUM_TIMEOUT_SECONDS,
                         TimeUnit.MILLISECONDS);
         return true;
     }
@@ -200,5 +200,13 @@ public class NavigationActions extends Locators {
             i++;
         }
         return WebElementExists(driver, element);
+    }
+
+    public void listIframesFromPage(WebDriver driver) {
+        final List<WebElement> iframes = driver.findElements(By.tagName("frame"));
+        for (WebElement iframe : iframes) {
+            LOGGER.info(iframe.getAttribute("id"));
+            LOGGER.info(iframe.getAttribute("name"));
+        }
     }
 }

@@ -40,11 +40,11 @@ public class StartWebDriver {
         }
         globalDriver.set(rwd);
         globalDriver.get().manage().timeouts()
-                .pageLoadTimeout(timeOut, TimeUnit.MILLISECONDS);
+                .pageLoadTimeout(timeOut, TimeUnit.SECONDS);
         globalDriver.get().manage().timeouts()
-                .setScriptTimeout(timeOut, TimeUnit.MILLISECONDS);
+                .setScriptTimeout(timeOut, TimeUnit.SECONDS);
         globalDriver.get().manage().timeouts()
-                .implicitlyWait(timeOut, TimeUnit.MILLISECONDS);
+                .implicitlyWait(timeOut, TimeUnit.SECONDS);
         globalDriver.get().manage().deleteAllCookies();
         globalDriver.get().manage().window().maximize();
         globalDriver.get().get(host);
