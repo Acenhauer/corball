@@ -82,7 +82,6 @@ public class BrowserCapabilities {
                 caps.setCapability("id", testName);
                 caps.setCapability("name", testName);
                 caps.setCapability("chrome.prefs", getChromePrefs());
-                caps.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
                 return caps;
             } else if (browser.equalsIgnoreCase("IE")) {
                 caps = DesiredCapabilities.internetExplorer();
