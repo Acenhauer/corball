@@ -1,7 +1,7 @@
 Corball Functional Testing Framework
 ===============
 
-Main package for Corball test automation packages, a test automation framework in Java and based on TestNG
+Corball test automation packages, a test automation framework in Java and based on TestNG
 
 Corball Supported Platform
 ==========================
