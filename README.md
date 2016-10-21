@@ -34,7 +34,7 @@ https://mvnrepository.com/artifact/com.acenhauer.corball/corball-core
 Corball Functional Testing Framework DEMO package
 ===============
 
-Here you can find the example tests demo
+Here you can find the example tests demo, you have to checkout the code from here:
 
 https://github.com/Acenhauer/corball-test-automation-demo
 
