@@ -18,7 +18,7 @@ Corball supports automation on the following platforms:
 Corball Functional Testing Framework Maven Dependency
 ===============
 
-To start using Corball, just add this dependency on your pom.xml
+To start using Corball, just add this dependency on your pom.xml from your project
 
     <dependency>
         <groupId>com.acenhauer.corball</groupId>
