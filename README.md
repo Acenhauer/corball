@@ -11,7 +11,7 @@ To start using Corball, just add this dependency on your pom.xml
     <dependency>
         <groupId>com.acenhauer.corball</groupId>
         <artifactId>corball-core</artifactId>
-        <version>16.10.13</version>
+        <version>16.10.21</version>
     </dependency>
 
 
