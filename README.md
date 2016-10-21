@@ -1,7 +1,19 @@
 Corball Functional Testing Framework
 ===============
 
-Main package for Corball test automation packages
+Corball test automation packages, a test automation framework in Java and based on TestNG
+
+Corball Supported Platform
+==========================
+
+Corball supports automation on the following platforms:
+
+* Selenium WebDriver
+* Native Android application
+* Native IOS application
+* Chrome Mobile Browser
+* Safari Mobile Browser
+* XML and SOAP based applications
 
 Corball Functional Testing Framework Maven Dependency
 ===============
