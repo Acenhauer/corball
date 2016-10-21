@@ -37,3 +37,13 @@ Corball Functional Testing Framework DEMO package
 Here you can find the example tests demo
 
 https://github.com/Acenhauer/corball-test-automation-demo
+
+
+You will find examples for the following platforms:
+
+* Selenium WebDriver
+* Native Android application
+* Native IOS application
+* Chrome Mobile Browser
+* Safari Mobile Browser
+* XML and SOAP based applications
