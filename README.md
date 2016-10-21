@@ -3,6 +3,17 @@ Corball Functional Testing Framework
 
 Main package for Corball test automation packages
 
+Corball Supported Platform
+==========================
+
+Corball supports automation on the following platforms:
+
+* Selenium WebDriver
+* Native Android application
+* Native IOS application
+* Chrome Mobile Browser
+* Safari Mobile Browser
+
 Corball Functional Testing Framework Maven Dependency
 ===============
 
