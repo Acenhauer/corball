@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.acenhauer.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.10.21-SNAPSHOT</version>
+    <version>16.10.21</version>
     <name>Corball</name>
     <description>Corball - The Automation Framework</description>
     <url>https://github.com/Acenhauer/corball-test-automation-demo</url>
