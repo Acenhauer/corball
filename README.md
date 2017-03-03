@@ -21,22 +21,22 @@ Corball Functional Testing Framework Maven Dependency
 To start using Corball, just add this dependency on your pom.xml from your project
 
     <dependency>
-        <groupId>com.acenhauer.corball</groupId>
+        <groupId>com.gromenaware.corball</groupId>
         <artifactId>corball-core</artifactId>
-        <version>16.10.21</version>
+        <version>17.03.03</version>
     </dependency>
 
 
 Check historical versions here
 
-https://mvnrepository.com/artifact/com.acenhauer.corball/corball-core
+https://mvnrepository.com/artifact/com.gromenaware.corball/corball-core
 
 Corball Functional Testing Framework DEMO package
 ===============
 
 Here you can find the example tests demo, you have to checkout the code from here:
 
-https://github.com/Acenhauer/corball-test-automation-demo
+https://github.com/Gromenaware/corball-test-automation-demo
 
 
 You will find examples for the following platforms:
@@ -47,3 +47,13 @@ You will find examples for the following platforms:
 * Chrome Mobile Browser
 * Safari Mobile Browser
 * XML and SOAP based applications
+
+## Support
+
+This tutorial is released into the public domain by [Guillem Hernández Sola](https://www.linkedin.com/in/guillemhernandezsola/)  under WTFPL.
+
+[![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)](http://www.wtfpl.net/)
+
+This README file was originally written by [Guillem Hernández Sola](https://www.linkedin.com/in/guillemhernandezsola/) and is likewise released into the public domain.
+
+Please contact [Guillem Hernández Sola](https://www.linkedin.com/in/guillemhernandezsola/) for further details.

@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.acenhauer.corball</groupId>
+    <groupId>com.gromenaware.corball</groupId>
     <artifactId>corball-core</artifactId>
-    <version>16.10.21</version>
+    <version>17.03.03</version>
     <name>Corball</name>
     <description>Corball - The Automation Framework</description>
-    <url>https://github.com/Acenhauer/corball-test-automation-demo</url>
+    <url>https://github.com/Gromenaware/corball-test-automation-demo</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -16,17 +16,17 @@
         </license>
     </licenses>
     <organization>
-        <name>Acenhauer</name>
-        <url>http://www.acenhauer.com</url>
+        <name>gromenaware</name>
+        <url>http://www.gromenaware.com</url>
     </organization>
     <developers>
         <developer>
             <id>guillemhs</id>
             <name>Guillem Hernandez Sola</name>
-            <email>guillem@acenhauer.com</email>
-            <url>http://www.acenhauer.com</url>
-            <organization>Acenhauer</organization>
-            <organizationUrl>http://www.acenhauer.com</organizationUrl>
+            <email>guillem@gromenaware.com</email>
+            <url>http://www.gromenaware.com</url>
+            <organization>Gromenaware</organization>
+            <organizationUrl>http://www.gromenaware.com</organizationUrl>
             <roles>
                 <role>architect</role>
                 <role>developer</role>
@@ -34,9 +34,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git@github.com:Acenhauer/corball-test-automation.git</connection>
-        <url>scm:git:git@github.com:Acenhauer/corball-test-automation.git</url>
-        <developerConnection>scm:git:git@github.com:Acenhauer/corball-test-automation.git</developerConnection>
+        <connection>scm:git:git@github.com:Gromenaware/corball-test-automation.git</connection>
+        <url>scm:git:git@github.com:Gromenaware/corball-test-automation.git</url>
+        <developerConnection>scm:git:git@github.com:Gromenaware/corball-test-automation.git</developerConnection>
     </scm>
     <distributionManagement>
         <snapshotRepository>
@@ -151,7 +151,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>io.appium</groupId>
@@ -161,7 +161,7 @@
         <dependency>
             <groupId>com.saucelabs</groupId>
             <artifactId>sauce_testng</artifactId>
-            <version>2.1.21</version>
+            <version>2.1.23</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
